@@ -22,16 +22,16 @@ export type ApiResponse<SuccessT, ErrorT> =
     | {
     success: true;
     data: SuccessT;
-    status: StatusHTTP;
+    status: number | string;
 }
     | {
     success: false;
     data: ErrorT;
-    status: StatusHTTP;
+    status: number | string;
 }
     | {
     success: false;
-    data: any;
+    data: Error;
     status: StatusHTTP;
 };
 
