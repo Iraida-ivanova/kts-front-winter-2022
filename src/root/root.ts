@@ -1,15 +1,11 @@
-import GitHubStore from "../store/GitHubStore/index";
-import {HTTPMethod} from "../shared/store/ApiStore/types";
+import GitHubStore from '../store/GitHubStore/GitHubStore';
 
+const gitHubStore = new GitHubStore();
 
+const EXAMPLE_ORGANIZATION = 'ktsstudio';
 
-
-
-let gitHubStore = new GitHubStore();
-let params = {
-    method: HTTPMethod.GET,
-    endpoint:'/orgs/ktsstudio/repos',
-    headers: {'Content-Type': 'application/json'},
-    data: {},
-}
-const gitRepos = gitHubStore.getOrganizationReposList(params).then(body =>body.data )
+gitHubStore.getOrganizationReposList({
+    organizationName: EXAMPLE_ORGANIZATION
+}).then(result => {
+    console.log(result);
+})
