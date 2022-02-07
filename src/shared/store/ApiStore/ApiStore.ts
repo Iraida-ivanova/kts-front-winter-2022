@@ -1,53 +1,56 @@
 import qs from "qs";
-import {ApiResponse, IApiStore, RequestParams} from "./types";
+import {ApiResponse, HTTPMethod, IApiStore, RequestParams, StatusHTTP,} from "./types";
 // import {throws} from "assert";
 // import {Simulate} from "react-dom/test-utils";
 // import error = Simulate.error;
 
 export default class ApiStore implements IApiStore {
-    readonly baseUrl:string = 'https://api.github.com';
+    readonly baseUrl:string;
     constructor(baseUrl: string) {
         this.baseUrl= baseUrl;
     }
 
-    request<SuccessT, ErrorT = any, ReqT = {}>(params: RequestParams<ReqT>): Promise<ApiResponse<SuccessT, ErrorT>> {
+   async request<SuccessT, ErrorT = any, ReqT = {}>(params: RequestParams<ReqT>): Promise<ApiResponse<SuccessT, ErrorT>> {
         let options = {};
-        let url:string = this.baseUrl;
-        if (params.method === 'GET'){
-            url += params.endpoint;
+        let url:string = this.baseUrl + params.endpoint;
+        if (params.method === HTTPMethod.GET){
+            url = `${url}?${qs.stringify(params.data)}`;
             options = {
                 method: params.method,
                 headers: params.headers,
             }
         }
-        else if (params.method === 'POST') {
+        else if (params.method === HTTPMethod.POST) {
             options = {
                 method: params.method,
-                headers: params.headers,
+                headers: {...params.headers, 'Content-Type': 'application/json;charset=utf-8'},
                 body: JSON.stringify(params.data)
             }
         }
-        let response: Promise<ApiResponse<SuccessT, any>> = fetch(url, options)
-        .then(resp => {
-            if (resp.ok) {
-                return resp.json()
-                    .then(body => {
-                        return {
-                            success: true,
-                            data: body,
-                            status: resp.status,
-                        }
-                    })
+
+
+        try {
+            let response = await fetch(url, options);
+            if (response.ok) {
+                return {
+                    success: true,
+                    data: await response.json(),
+                    status: StatusHTTP.Success,
+                }
             } else {
                 return {
-                    success: resp.ok,
-                    data: 'Ошибка сетевого запроса',
-                    status: resp.status,
+                    success: false,
+                    data: await response.json(),
+                    status: StatusHTTP.BadRequest,
                 }
             }
-        })
-
-        return response;
+        } catch (error) {
+            return {
+                success: false,
+                data: error,
+                status: StatusHTTP.UnExpectedError,
+            }
+        }
 
     }
 }

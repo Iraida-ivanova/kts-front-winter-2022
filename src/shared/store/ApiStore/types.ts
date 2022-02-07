@@ -11,10 +11,10 @@ export type RequestParams<ReqT> = {
     data: ReqT;
 }
 
-enum StatusHTTP {
+export enum StatusHTTP {
     Success = 200,
     BadRequest = 400,
-    ClientErrorNotFound = 404
+    UnExpectedError = 'UnExpectedError'
 }
 
 
@@ -27,6 +27,11 @@ export type ApiResponse<SuccessT, ErrorT> =
     | {
     success: false;
     data: ErrorT;
+    status: StatusHTTP;
+}
+    | {
+    success: false;
+    data: any;
     status: StatusHTTP;
 };
 
