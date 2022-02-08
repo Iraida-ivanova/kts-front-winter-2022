@@ -1,4 +1,4 @@
-import {GetOrganizationReposListParams, IGitHubStore, RepoItem} from "./types";
+import {GetOrganizationReposListParams, IGitHubStore, PostOrganizationReposListParams, RepoItem} from "./types";
 import ApiStore from "../../shared/store/ApiStore/ApiStore";
 import {ApiResponse, HTTPMethod} from "../../shared/store/ApiStore/types";
 
@@ -16,7 +16,16 @@ export default class GitHubStore implements IGitHubStore {
             data:{},
             endpoint:`/orgs/${params.organizationName}/repos`
         });
+    }
 
 
+
+    async postOrganizationReposList(params: PostOrganizationReposListParams): Promise<ApiResponse<RepoItem[], any>> {
+        return  await this.apiStore.request({
+            method: HTTPMethod.POST,
+            headers: {},
+            data: params.data,
+            endpoint:`/orgs/${params.organizationName}/repos`
+        });
     }
 }
