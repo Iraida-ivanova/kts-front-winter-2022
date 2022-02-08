@@ -1,0 +1,195 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300,100italic,100);
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box
+}
+:root {
+    --body-background-color: #E5E5E5;
+    --disabled-element-color:#D9D9D9;
+    --gray-text-color: #7E7E7E;
+    --hover-link-color: #208FBF;
+    --white-color: #FFFFFF;
+    --red-in-repos-list: #FF5555;
+    --shadow-color: #B6B6B640;
+    --black-text-color: #000000;
+    --border-repos-list: 1px solid #D9D9D9;
+    --element-border-radius: 6px;
+    --padding-in-element: 12px;
+    --indent-outside-element: 20px;
+}
+body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--body-background-color);
+    font-family: 'Roboto', sans-serif;
+    padding-top: var(--indent-outside-element);
+}
+
+.list-repository {
+    width: 397px;
+    max-height: 1024px;
+    background: var(--white-color) ;
+    padding: var(--indent-outside-element);
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns:minmax(auto, 295px) 50px;
+    column-gap: var(--padding-in-element);
+    row-gap: var(--indent-outside-element);
+}
+
+.input-line__input {
+    border: var(--border-repos-list);
+    border-radius: var(--element-border-radius);
+    width: 100%;
+    height: 100%;
+    padding: var(--padding-in-element);
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--black-text-color);
+}
+
+.input-line__input:focus {
+    border-color: var(--red-in-repos-list);
+    outline:none;
+}
+
+.input-line__input:disabled {
+    background-color: var(--disabled-element-color);
+}
+
+.input-line__input::placeholder {
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--gray-text-color);
+}
+
+.input-line__search-button {
+    background: var(--red-in-repos-list);
+    border-radius: var(--element-border-radius);
+    position: relative;
+    cursor: pointer;
+}
+
+.input-line__search-icon {
+    font-size: 18px;
+    color: var(--white-color);
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.input-line__search-button:hover {
+    opacity: 0.7;
+}
+
+.input-line__search-button:disabled {
+    background-color: var(--disabled-element-color);
+}
+
+.reposList {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.git-repo-tile {
+    height: 104px;
+    width: 357px;
+    border: var(--border-repos-list);
+    border-radius: var(--element-border-radius);
+    padding: var(--padding-in-element);
+    display: flex;
+    align-items: center;
+    gap: var(--padding-in-element);
+    margin-bottom: var(--indent-outside-element);
+    cursor: pointer;
+
+}
+.git-repo-tile:hover {
+    box-shadow: 0 2px 6px 0 var(--shadow-color);
+}
+
+.git-repo-tile__avatar {
+    height: 80px;
+    width: 80px;
+    position: relative;
+    background: var(--white-color);
+}
+
+.git-repo-tile__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    z-index: 2;
+    /*visibility: hidden;*/
+}
+
+.git-repo-tile__default-avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    background: var(--red-in-repos-list);
+    text-align: center;
+}
+
+.git-repo-tile__repo-first-letter{
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--white-color);
+    line-height: 80px;
+    visibility: visible;
+}
+
+.git-repo-tile__content {
+    height: 59px;
+    width: 241px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.git-repo-tile__org-link {
+    line-height: 16px;
+    font-size: 14px;
+    color: var(--gray-text-color);
+    text-decoration:none
+}
+
+.git-repo-tile__org-link:hover {
+    color: var(--hover-link-color);
+    text-decoration:none;
+}
+
+.git-repo-tile__repo-name {
+    display: inline-block;
+    color: var(--black-text-color);
+    line-height: 19px;
+    font-size: 16px;
+    font-weight: bold;
+    white-space: nowrap;
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.git-repo-tile__info {
+    line-height: 16px;
+    font-size: 14px;
+    color: var(--gray-text-color);
+    display: flex;
+    gap: var(--indent-outside-element);
+    align-items: center;vertical-align: center;
+}
+
+.git-repo-tile__star {
+    vertical-align: top;
+}
