@@ -1,6 +1,19 @@
 import { ApiResponse } from "@shared/store/ApiStore/types";
 
-export type RepoItem = {};
+export type GitHubRepoOwner = {
+  id: number;
+  html_url: string;
+  avatar_url: string;
+  login: string;
+};
+export type RepoItem = {
+  id: number;
+  url: string;
+  name: string;
+  stargazers_count: number;
+  owner: GitHubRepoOwner;
+  updated_at: Date;
+};
 
 export type GetOrganizationReposListParams = {
   organizationName: string;
