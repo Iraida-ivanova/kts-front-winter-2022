@@ -40,9 +40,9 @@
 .git-repo-tile__repo-name {
     display: inline-block;
     color: var(--black-text-color);
+    height: 19px;
     line-height: 19px;
     font-size: 16px;
-    font-weight: bold;
     white-space: nowrap;
     width: 100%;
     text-overflow: ellipsis;

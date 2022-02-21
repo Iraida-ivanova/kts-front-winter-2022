@@ -28,7 +28,16 @@ const ReposSearchPage = () => {
       })
       .then((result: ApiResponse<RepoItem[], any>) => {
         if (result.success) {
-          setReposList(result.data);
+          setReposList(
+            result.data.map((item) => ({
+              id: item.id,
+              url: item.url,
+              name: item.name,
+              stargazers_count: item.stargazers_count,
+              owner: item.owner,
+              updated_at: item.updated_at,
+            }))
+          );
           setIsLoading(false);
         } else {
           setError(result.data);
