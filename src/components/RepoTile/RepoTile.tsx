@@ -8,7 +8,7 @@ import { RepoItem } from "@store/GitHubStore/types";
 
 type RepoTileProps = {
   item: RepoItem;
-  onClick?: (e: React.MouseEvent) => void;
+  onClick: (id: number) => void;
 };
 
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
@@ -31,8 +31,9 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
     const month: string = monthNames[new Date(date).getMonth()];
     return `${day} ${month}`;
   };
+  const handleClick = () => onClick(item.id);
   return (
-    <div className="git-repo-tile" onClick={onClick}>
+    <div className="git-repo-tile" onClick={handleClick}>
       <Avatar
         src={item.owner.avatar_url}
         alt={"Avatar"}
@@ -51,7 +52,7 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
         </p>
         <div className="git-repo-tile__info">
           <span className="git-repo-tile__rating">
-            <StarIcon currentColor={"var(--star-color)"} />
+            <StarIcon />
             {" " + item.stargazers_count}
           </span>
           <span className="git-repo-tile__update-date">

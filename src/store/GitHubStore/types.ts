@@ -18,6 +18,9 @@ export type RepoItem = {
 export type GetOrganizationReposListParams = {
   organizationName: string;
 };
+export type GetRepoParams = {
+  repoId: number;
+};
 
 export type PostOrganizationReposListParams = {
   organizationName: string;
