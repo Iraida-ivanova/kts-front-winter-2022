@@ -4,15 +4,17 @@ import "./Input.css";
 type InputProps = {
   value: string;
   placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (value: string) => void;
 };
 
 const Input: React.FC<InputProps> = ({ value, placeholder, onChange }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    onChange(e.target.value);
   return (
     <div>
       <input
         className="input-line__input"
-        onChange={onChange}
+        onChange={handleChange}
         placeholder={placeholder}
         value={value}
       />
@@ -20,4 +22,4 @@ const Input: React.FC<InputProps> = ({ value, placeholder, onChange }) => {
   );
 };
 
-export default Input;
+export default React.memo(Input);

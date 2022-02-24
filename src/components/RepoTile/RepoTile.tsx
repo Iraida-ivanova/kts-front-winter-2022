@@ -8,35 +8,39 @@ import { RepoItem } from "@store/GitHubStore/types";
 
 type RepoTileProps = {
   item: RepoItem;
-  onClick?: (e: React.MouseEvent) => void;
+  onClick: (id: number) => void;
 };
-
+const getUpdateDate = (date: Date) => {
+  let monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const day: number = new Date(date).getDate();
+  const month: string = monthNames[new Date(date).getMonth()];
+  return `${day} ${month}`;
+};
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
-  const getUpdateDate = (date: Date) => {
-    let monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const day: number = new Date(date).getDate();
-    const month: string = monthNames[new Date(date).getMonth()];
-    return `${day} ${month}`;
-  };
+  const handleClick = () => onClick(item.id);
   return (
-    <div className="git-repo-tile" onClick={onClick}>
+    <div className="git-repo-tile" onClick={handleClick}>
       <Avatar
         src={item.owner.avatar_url}
         alt={"Avatar"}
-        letter={item.owner.login[0].toUpperCase()}
+        letter={
+          item.owner.login.length
+            ? item.owner.login[0].toUpperCase()
+            : undefined
+        }
       />
       <div className="git-repo-tile__content">
         <b className="git-repo-tile__repo-name">{item.name}</b>
@@ -51,7 +55,7 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
         </p>
         <div className="git-repo-tile__info">
           <span className="git-repo-tile__rating">
-            <StarIcon currentColor={"var(--star-color)"} />
+            <StarIcon />
             {" " + item.stargazers_count}
           </span>
           <span className="git-repo-tile__update-date">
