@@ -1,63 +1,66 @@
-import "./RepoTile.css";
+import "./RepoTile.module.scss";
 import React from "react";
-import "./RepoTile.css";
 
 import Avatar from "@components/Avatar";
 import StarIcon from "@components/StarIcon";
 import { RepoItem } from "@store/GitHubStore/types";
 
+import styles from "./RepoTile.module.scss";
+
 type RepoTileProps = {
   item: RepoItem;
   onClick: (id: number) => void;
 };
+export const getUpdateDate = (date: string) => {
+  let monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const day: number = new Date(date).getDate();
+  const month: string = monthNames[new Date(date).getMonth()];
+  return `${day} ${month}`;
+};
 
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
-  const getUpdateDate = (date: Date) => {
-    let monthNames = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const day: number = new Date(date).getDate();
-    const month: string = monthNames[new Date(date).getMonth()];
-    return `${day} ${month}`;
-  };
   const handleClick = () => onClick(item.id);
   return (
-    <div className="git-repo-tile" onClick={handleClick}>
+    <div className={styles.gitRepoTile} onClick={handleClick}>
       <Avatar
         src={item.owner.avatar_url}
         alt={"Avatar"}
-        letter={item.owner.login[0].toUpperCase()}
+        letter={
+          item.owner.login.length
+            ? item.owner.login[0].toUpperCase()
+            : undefined
+        }
       />
-      <div className="git-repo-tile__content">
-        <b className="git-repo-tile__repo-name">{item.name}</b>
-        <p className="git-repo-tile__org-name">
+      <div className={styles.repoTileContent}>
+        <b className={styles.repoName}>{item.name}</b>
+        <p className={styles.orgName}>
           <a
             href={item.owner.html_url}
-            className="git-repo-tile__org-link"
+            className={styles.orgLink}
             target={"blank"}
           >
             {item.owner?.login}
           </a>
         </p>
-        <div className="git-repo-tile__info">
-          <span className="git-repo-tile__rating">
+        <div className={styles.repoInfo}>
+          <span>
             <StarIcon />
             {" " + item.stargazers_count}
           </span>
-          <span className="git-repo-tile__update-date">
-            Updated {getUpdateDate(item.updated_at)}
-          </span>
+          <span>Updated {getUpdateDate(item.updated_at)}</span>
         </div>
       </div>
     </div>

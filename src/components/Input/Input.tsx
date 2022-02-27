@@ -1,5 +1,6 @@
 import React from "react";
-import "./Input.css";
+
+import styles from "./Input.module.scss";
 
 type InputProps = {
   value: string;
@@ -9,12 +10,13 @@ type InputProps = {
 
 const Input: React.FC<InputProps> = ({ value, placeholder, onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(value);
+    onChange(e.target.value);
   };
   return (
     <div>
       <input
-        className="input-line__input"
+        className={styles.input}
+        type="text"
         onChange={handleChange}
         placeholder={placeholder}
         value={value}

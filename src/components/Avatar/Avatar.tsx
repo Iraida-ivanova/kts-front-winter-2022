@@ -1,22 +1,23 @@
 import React from "react";
-import "./Avatar.css";
+
+import styles from "./Avatar.module.scss";
 
 type AvatarProps = {
   src?: string;
   alt: string;
-  letter: string;
+  letter?: string;
 };
 
 const Avatar: React.FC<AvatarProps> = ({ src, alt, letter }) => {
   return (
-    <div className="git-repo-tile__avatar">
+    <div className={styles.avatar}>
       {src ? (
         <div>
-          <img className="git-repo-tile__img" src={src} alt={alt} />
+          <img className={styles.img} src={src} alt={alt} />
         </div>
       ) : (
-        <div className="git-repo-tile__default-avatar">
-          <span className="git-repo-tile__repo-first-letter">{letter}</span>
+        <div className={styles.defaultAvatar}>
+          <span className={styles.repoFirstLetter}>{letter}</span>
         </div>
       )}
     </div>

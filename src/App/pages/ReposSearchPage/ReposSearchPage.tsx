@@ -1,29 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Navigate } from "react-router-dom";
-import "./ReposSearchPage.css";
 import Button from "@components/Button";
 import Input from "@components/Input";
 import RepoTile from "@components/RepoTile";
 import SearchIcon from "@components/SearchIcon";
+import { useNavigate } from "react-router-dom";
 
 import { useReposContext } from "../../App";
+import styles from "./ReposSearchPage.module.scss";
 
 const ReposSearchPage = () => {
   const [value, setValue] = React.useState("");
-  const handleChange = (value: string): void => {
-    setValue(value);
+  const handleChange = (newValue: string): void => {
+    setValue(newValue);
   };
   const ReposContext = useReposContext();
   const handleClick = (e: React.MouseEvent) => {
     ReposContext.load(value);
   };
+  let navigate = useNavigate();
   const onClickRepoTile = (id: number) => {
-    return <Navigate to={`:${id}`} />;
+    navigate(`${id}`);
   };
+  useEffect(() => {
+    ReposContext.load("ktsstudio");
+  }, []);
 
   return (
-    <div className="list-repository">
+    <div className={styles.listRepository}>
       <Input
         value={value}
         placeholder={"Введите название организации"}
@@ -33,11 +37,11 @@ const ReposSearchPage = () => {
         <SearchIcon />
       </Button>
       {ReposContext.isLoading ? (
-        <div className={"list-repository-is-loading"}>
+        <div className={styles.listRepositoryIsLoading}>
           Список репозиториев загружается...
         </div>
       ) : (
-        <div className="reposList">
+        <div className={styles.reposList}>
           {!ReposContext.error ? (
             ReposContext.list?.map((item) => {
               return (

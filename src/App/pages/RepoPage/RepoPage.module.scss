@@ -1,0 +1,66 @@
+@import "src/styles/variables.scss";
+.repoPage {
+    .wrapper {
+        width: 600px;
+        background: $white-color ;
+        padding: $indent-outside-element;
+        margin: 0 auto;
+        border-radius: $element-border-radius;
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: $padding-in-element;
+            margin-bottom: $indent-outside-element;
+
+            .ownerName {
+                font-size: 24px;
+                font-weight: normal;
+            }
+            .repoName {
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .repoVisibility {
+                color: $gray-text-color;
+                font-size: 12px;
+                font-weight: bold;
+                border: $border-repos-list;
+                border-radius: $element-border-radius;
+                padding: 2px;
+            }
+
+        }
+        .description {
+            &Text {
+                padding:20px 0;
+            }
+        }
+        .topics {
+            margin-bottom: $indent-outside-element;
+
+            .topic {
+                background-color: $pink-in-repos-list;
+                color: $red-in-repos-list;
+                border-radius: $element-border-radius;
+                padding:2px 4px;
+                margin-right: $padding-in-element;
+            }
+        }
+        .repoInfo {
+            line-height: 18px;
+            font-size: 16px;
+            color: $gray-text-color;
+            display: flex;
+            gap: $indent-outside-element;
+            align-items: center;
+            vertical-align: center;
+        }
+    }
+}
+
+
+
+
+
+

@@ -1,12 +1,11 @@
 import React, { createContext, useContext } from "react";
 
-import "./App.css";
 import { ApiResponse } from "@shared/store/ApiStore/types";
 import GitHubStore from "@store/GitHubStore";
 import { RepoItem } from "@store/GitHubStore/types";
-import { Layout } from "antd";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Outlet, Navigate } from "react-router-dom";
 
+import styles from "./App.module.scss";
 import RepoPage from "./pages/RepoPage";
 import ReposSearchPage from "./pages/ReposSearchPage";
 
@@ -24,47 +23,65 @@ const ReposContext = createContext<ReposContext>({
 });
 const Provider = ReposContext.Provider;
 export const useReposContext = () => useContext(ReposContext);
+const gitHubStore = new GitHubStore();
 
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [list, setList] = React.useState<RepoItem[]>([]);
   const [error, setError] = React.useState(null);
-  const gitHubStore = new GitHubStore();
-  const load = (value: string) => {
+  const load = async (value: string) => {
     setIsLoading(true);
     setError(null);
-    gitHubStore
-      .getOrganizationReposList({
-        organizationName: value,
-      })
-      .then((result: ApiResponse<RepoItem[], any>) => {
-        if (result.success) {
-          setList(
-            result.data.map((item) => ({
-              id: item.id,
-              url: item.url,
-              name: item.name,
-              stargazers_count: item.stargazers_count,
-              owner: item.owner,
-              updated_at: item.updated_at,
-            }))
-          );
-          setIsLoading(false);
-        } else {
-          setError(result.data);
-          setIsLoading(false);
-        }
-      });
+    try {
+      const result: ApiResponse<RepoItem[], any> =
+        await gitHubStore.getOrganizationReposList({
+          organizationName: value,
+        });
+      if (result.success) {
+        setList(
+          result.data.map((item) => ({
+            id: item.id,
+            url: item.url,
+            name: item.name,
+            stargazers_count: item.stargazers_count,
+            owner: item.owner,
+            updated_at: item.updated_at,
+            visibility: item.visibility,
+            description: item.description,
+            topics: item.topics,
+          }))
+        );
+      } else {
+        throw new Error();
+      }
+    } catch (err: any) {
+      setError(err);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <Provider value={{ list, isLoading, load, error }}>
       <Routes>
-        <Route path={"/repos"} element={<ReposSearchPage />}>
+        <Route path={"/repos/*"} element={<Layout />}>
+          <Route index element={<ReposSearchPage />} />
           <Route path={":id"} element={<RepoPage />} />
         </Route>
+        <Route path={"*"} element={<Navigate to={"/repos"} />} />
       </Routes>
     </Provider>
   );
 };
 
 export default App;
+function Layout() {
+  return (
+    <div className={styles.App}>
+      {/*<Header/>*/}
+      <main>
+        <Outlet />
+      </main>
+      {/*<Footer contacts={contacts}/>*/}
+    </div>
+  );
+}

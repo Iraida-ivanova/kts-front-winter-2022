@@ -1,6 +1,6 @@
-import "./Button.css";
 import React from "react";
 
+import styles from "./Button.module.scss";
 type ButtonProps = {
   children: React.ReactNode;
   onClick: (e: React.MouseEvent) => void;
@@ -9,7 +9,7 @@ type ButtonProps = {
 const Button: React.FC<ButtonProps> = ({ onClick, children, disabled }) => {
   return (
     <button
-      className="input-line__search-button"
+      className={styles.searchButton}
       onClick={onClick}
       disabled={disabled}
     >

@@ -3,8 +3,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 
-import "@styles/index.css";
-import "@styles/variables.css";
+import "@styles/index.scss";
+import "@styles/variables.scss";
 import App from "./App/App";
 
 ReactDOM.render(

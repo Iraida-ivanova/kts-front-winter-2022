@@ -1,0 +1,68 @@
+@import "src/styles/variables.scss";
+.gitRepoTile {
+    height: 104px;
+    width: 357px;
+    background-color: $white-color;
+    border: $border-repos-list;
+    border-radius: $element-border-radius;
+    padding: $padding-in-element;
+    display: flex;
+    align-items: center;
+    gap: $padding-in-element;
+    margin-bottom: $indent-outside-element;
+    cursor: pointer;
+
+    .repoTileContent {
+        height: 59px;
+        width: 241px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .repoName {
+            display: inline-block;
+            color: $black-text-color;
+            height: 19px;
+            line-height: 19px;
+            font-size: 16px;
+            white-space: nowrap;
+            width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .orgName {
+            line-height: 16px;
+            font-size: 14px;
+
+            .orgLink {
+                color: $gray-text-color;
+                text-decoration:none
+            }
+            .orgLink:hover {
+                color: $hover-link-color;
+                text-decoration:none;
+            }
+        }
+        .repoInfo {
+            line-height: 16px;
+            font-size: 14px;
+            color: $gray-text-color;
+            display: flex;
+            gap: $indent-outside-element;
+            align-items: center;
+            vertical-align: center;
+        }
+    }
+}
+.gitRepoTile:hover {
+    box-shadow: 0 2px 6px 0 $shadow-color;
+}
+
+
+
+
+
+
+
+
+
