@@ -53,7 +53,7 @@ const RepoPage = () => {
       }
     }
     getRepo();
-  }, [id]);
+  }, [id, ReposContext]);
 
   return (
     <div className={styles.repoPage}>
