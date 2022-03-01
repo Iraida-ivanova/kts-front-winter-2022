@@ -24,7 +24,7 @@ const ReposSearchPage = () => {
   };
   useEffect(() => {
     ReposContext.load("ktsstudio");
-  }, []);
+  }, [ReposContext]);
 
   return (
     <div className={styles.listRepository}>
