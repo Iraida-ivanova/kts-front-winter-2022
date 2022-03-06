@@ -7,8 +7,6 @@ type ButtonProps = {
   disabled?: boolean;
 };
 const Button: React.FC<ButtonProps> = ({ onClick, children, disabled }) => {
-  // eslint-disable-next-line no-console
-  console.log("button render");
   return (
     <button
       className={styles.searchButton}

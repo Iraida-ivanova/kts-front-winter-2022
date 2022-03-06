@@ -30,8 +30,6 @@ export default class ReposListStore implements IReposListStore, ILocalStore {
     getInitialCollectionModel();
   private _meta: Meta = Meta.initial;
   constructor() {
-    // eslint-disable-next-line no-console
-    console.log("new");
     makeObservable<ReposListStore, PrivateFields>(this, {
       _meta: observable,
       _list: observable.ref,

@@ -8,14 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 import styles from "./ReposList.module.scss";
 const ReposList = () => {
-  // eslint-disable-next-line no-console
-  console.log("render ReposList");
   const reposListStore = useReposListContext();
 
   let navigate = useNavigate();
-  const onClickRepoTile = (id: number) => {
+  const onClickRepoTile = React.useCallback((id: number) => {
     navigate(`${id}`);
-  };
+  }, []);
   useEffect(() => {
     reposListStore.getOrganizationReposList({
       organizationName: "ktsstudio",

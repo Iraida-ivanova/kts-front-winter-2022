@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 import { useReposListContext } from "@App/App";
 import Button from "@components/Button";
@@ -13,19 +13,23 @@ import { observer } from "mobx-react-lite";
 import styles from "./ReposSearchPage.module.scss";
 
 const ReposSearchPage = () => {
-  // eslint-disable-next-line no-console
-  console.log("render");
   const reposListStore = useReposListContext();
   const inputValueStore = useLocalStore(() => new InputValueStore());
 
-  const handleChange = (newValue: string): void => {
-    inputValueStore.setValue(newValue);
-  };
-  const handleClick = (e: React.MouseEvent) => {
-    reposListStore.getOrganizationReposList({
-      organizationName: inputValueStore.value,
-    });
-  };
+  const handleChange = React.useCallback(
+    (newValue: string): void => {
+      inputValueStore.setValue(newValue);
+    },
+    [inputValueStore]
+  );
+  const handleClick = React.useCallback(
+    (e: React.MouseEvent) => {
+      reposListStore.getOrganizationReposList({
+        organizationName: inputValueStore.value,
+      });
+    },
+    [reposListStore, inputValueStore]
+  );
   return (
     <div className={styles.listRepository}>
       <Input

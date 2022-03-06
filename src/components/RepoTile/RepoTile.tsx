@@ -1,5 +1,5 @@
 import "./RepoTile.module.scss";
-import React from "react";
+import React, { useCallback } from "react";
 
 import Avatar from "@components/Avatar";
 import StarIcon from "@components/StarIcon";
@@ -32,7 +32,7 @@ export const getUpdateDate = (date: Date) => {
 };
 
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
-  const handleClick = () => onClick(item.id);
+  const handleClick = useCallback(() => onClick(item.id), [onClick, item.id]);
   return (
     <div className={styles.gitRepoTile} onClick={handleClick}>
       <Avatar
