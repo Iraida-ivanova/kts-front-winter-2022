@@ -8,57 +8,40 @@ import GitHubStore from "@store/GitHubStore";
 import { RepoItem } from "@store/GitHubStore/types";
 import { useParams, Navigate } from "react-router-dom";
 
-import { useReposContext } from "../../App";
 import styles from "./RepoPage.module.scss";
 const gitHubStore = new GitHubStore();
 const RepoPage = () => {
   const { id } = useParams();
-  const [repo, setRepo] = useState({
-    id: 0,
-    url: "",
-    name: "",
-    stargazers_count: 0,
-    owner: { id: 0, html_url: "", avatar_url: "", login: "" },
-    updated_at: "",
-    visibility: "",
-    description: "",
-    topics: [],
-  });
+  const [repo, setRepo] = useState<null | RepoItem>(null);
   const [error, setError] = React.useState(null);
-  const ReposContext = useReposContext();
   useEffect(() => {
     async function getRepo() {
-      ReposContext.isLoading = true;
-      try {
-        const result: ApiResponse<RepoItem, any> = await gitHubStore.getRepo({
-          repoId: Number(id),
+      const result: ApiResponse<RepoItem, any> = await gitHubStore.getRepo({
+        repoId: Number(id),
+      });
+      if (result.success) {
+        setRepo({
+          id: result.data.id,
+          url: result.data.url,
+          name: result.data.name,
+          stargazers_count: result.data.stargazers_count,
+          owner: result.data.owner,
+          updated_at: result.data.updated_at,
+          visibility: result.data.visibility,
+          description: result.data.description,
+          topics: result.data.topics,
         });
-        if (result.success) {
-          setRepo({
-            id: result.data.id,
-            url: result.data.url,
-            name: result.data.name,
-            stargazers_count: result.data.stargazers_count,
-            owner: result.data.owner,
-            updated_at: result.data.updated_at,
-            visibility: result.data.visibility,
-            description: result.data.description,
-            topics: result.data.topics,
-          });
-        } else {
-          setError(result.data);
-        }
-      } finally {
-        ReposContext.isLoading = false;
+      } else {
+        setError(result.data);
       }
     }
     getRepo();
-  }, [id, ReposContext]);
+  }, [id]);
 
   return (
     <div className={styles.repoPage}>
       {error && <Navigate to={"/repos"} />}
-      {ReposContext.isLoading && (
+      {repo && (
         <div className={styles.wrapper}>
           <div className={styles.header}>
             <Avatar
