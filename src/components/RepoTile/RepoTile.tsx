@@ -30,7 +30,6 @@ export const getUpdateDate = (date: string) => {
   const month: string = monthNames[new Date(date).getMonth()];
   return `${day} ${month}`;
 };
-
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
   const handleClick = () => onClick(item.id);
   return (

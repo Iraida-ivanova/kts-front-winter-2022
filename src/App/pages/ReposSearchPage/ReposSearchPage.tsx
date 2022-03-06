@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { useReposContext } from "../../App";
 import styles from "./ReposSearchPage.module.scss";
 
+const gitHubStore = new GitHubStore();
+
 const ReposSearchPage = () => {
   const [value, setValue] = React.useState("");
   const handleChange = (newValue: string): void => {
