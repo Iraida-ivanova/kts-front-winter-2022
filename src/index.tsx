@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import "@styles/index.scss";
 import "@styles/variables.scss";
+import "@config/configureMobX";
 import App from "./App/App";
 
 ReactDOM.render(

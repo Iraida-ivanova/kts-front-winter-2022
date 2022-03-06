@@ -1,12 +1,7 @@
+import { HTTPMethod } from "@utils/HTTPMethod";
 import qs from "qs";
 
-import {
-  ApiResponse,
-  HTTPMethod,
-  IApiStore,
-  RequestParams,
-  StatusHTTP,
-} from "./types";
+import { ApiResponse, IApiStore, RequestParams, StatusHTTP } from "./types";
 
 export default class ApiStore implements IApiStore {
   readonly baseUrl: string;

@@ -1,7 +1,4 @@
-export enum HTTPMethod {
-  GET = "GET",
-  POST = "POST",
-}
+import { HTTPMethod } from "@utils/HTTPMethod";
 
 export type RequestParams<ReqT> = {
   method: HTTPMethod; // Метод запроса, GET или POST
