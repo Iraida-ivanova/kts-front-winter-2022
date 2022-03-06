@@ -2,9 +2,9 @@ import React from "react";
 
 import ReposListStore from "@store/ReposListStore";
 import { useLocalStore } from "@utils/UseLocalStore";
-import { Route, Routes, Outlet, Navigate } from "react-router-dom";
+import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 
-import styles from "./App.module.scss";
+import Layout from "./pages/Layout";
 import RepoPage from "./pages/RepoPage";
 import ReposSearchPage from "./pages/ReposSearchPage";
 
@@ -27,27 +27,17 @@ export const useReposListContext = () => {
 
 const App = () => {
   return (
-    <Provider>
-      <Routes>
-        <Route path={"/repos/*"} element={<Layout />}>
-          <Route index element={<ReposSearchPage />} />
-          <Route path={":id"} element={<RepoPage />} />
-        </Route>
-        <Route path={"*"} element={<Navigate to={"/repos"} />} />
-      </Routes>
-    </Provider>
+    <BrowserRouter>
+      <Provider>
+        <Routes>
+          <Route path={"/repos/*"} element={<Layout />}>
+            <Route index element={<ReposSearchPage />} />
+            <Route path={":id"} element={<RepoPage />} />
+          </Route>
+          <Route path={"*"} element={<Navigate to={"/repos"} />} />
+        </Routes>
+      </Provider>
+    </BrowserRouter>
   );
 };
 export default App;
-
-function Layout() {
-  return (
-    <div className={styles.App}>
-      {/*<Header/>*/}
-      <main>
-        <Outlet />
-      </main>
-      {/*<Footer contacts={contacts}/>*/}
-    </div>
-  );
-}

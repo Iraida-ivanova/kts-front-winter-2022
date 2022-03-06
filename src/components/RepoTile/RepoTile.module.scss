@@ -1,5 +1,5 @@
-@import "src/styles/variables.scss";
-.gitRepoTile {
+@import "styles/variables.module.scss";
+.repoTile {
     height: 104px;
     width: 357px;
     background-color: $white-color;
@@ -11,15 +11,17 @@
     gap: $padding-in-element;
     margin-bottom: $indent-outside-element;
     cursor: pointer;
-
-    .repoTileContent {
+    &:hover {
+        box-shadow: 0 2px 6px 0 $shadow-color;
+    }
+    &__content {
         height: 59px;
         width: 241px;
         display: flex;
         flex-direction: column;
         gap: 4px;
 
-        .repoName {
+        &__name {
             display: inline-block;
             color: $black-text-color;
             height: 19px;
@@ -30,20 +32,21 @@
             text-overflow: ellipsis;
             overflow: hidden;
         }
-        .orgName {
+        &__orgName {
             line-height: 16px;
             font-size: 14px;
 
             .orgLink {
                 color: $gray-text-color;
-                text-decoration:none
-            }
-            .orgLink:hover {
-                color: $hover-link-color;
                 text-decoration:none;
+                &:hover {
+                    color: $hover-link-color;
+                    text-decoration:none;
+                }
             }
+
         }
-        .repoInfo {
+        &__info {
             line-height: 16px;
             font-size: 14px;
             color: $gray-text-color;
@@ -52,11 +55,20 @@
             align-items: center;
             vertical-align: center;
         }
-    }
+    };
+
 }
-.gitRepoTile:hover {
-    box-shadow: 0 2px 6px 0 $shadow-color;
-}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

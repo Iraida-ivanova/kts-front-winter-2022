@@ -30,11 +30,10 @@ export const getUpdateDate = (date: Date) => {
   const month: string = monthNames[new Date(date).getMonth()];
   return `${day} ${month}`;
 };
-
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
   const handleClick = useCallback(() => onClick(item.id), [onClick, item.id]);
   return (
-    <div className={styles.gitRepoTile} onClick={handleClick}>
+    <div className={styles.repoTile} onClick={handleClick}>
       <Avatar
         src={item.owner.avatarUrl}
         alt={"Avatar"}
@@ -44,9 +43,9 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
             : undefined
         }
       />
-      <div className={styles.repoTileContent}>
-        <b className={styles.repoName}>{item.name}</b>
-        <p className={styles.orgName}>
+      <div className={styles.repoTile__content}>
+        <b className={styles.repoTile__content__name}>{item.name}</b>
+        <p className={styles.repoTile__content__orgName}>
           <a
             href={item.owner.htmlUrl}
             className={styles.orgLink}
@@ -55,7 +54,7 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
             {item.owner?.login}
           </a>
         </p>
-        <div className={styles.repoInfo}>
+        <div className={styles.repoTile__content__info}>
           <span>
             <StarIcon />
             {" " + item.stargazersCount}

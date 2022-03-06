@@ -1,18 +1,15 @@
 import React from "react";
 
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
 
-import "@styles/index.scss";
-import "@styles/variables.scss";
+import "@styles/index.module.scss";
+import "@styles/variables.module.scss";
 import "@config/configureMobX";
 import App from "./App/App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
