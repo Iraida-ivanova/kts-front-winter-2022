@@ -1,0 +1,26 @@
+@import "styles/variables.module";
+.input {
+    border: $border-repos-list;
+    border-radius: $element-border-radius;
+    width: 100%;
+    height: 100%;
+    padding: $padding-in-element;
+    font-size: 14px;
+    line-height: 16px;
+    color: $black-text-color;
+}
+
+.input:focus {
+    border-color: $red-in-repos-list;
+    outline:none;
+}
+
+.input:disabled {
+    background-color: $disabled-element-color;
+}
+
+.input::placeholder {
+    font-size: 14px;
+    line-height: 16px;
+    color: $gray-text-color;
+}

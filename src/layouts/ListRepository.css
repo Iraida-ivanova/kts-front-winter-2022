@@ -90,11 +90,6 @@ body {
     background-color: var(--disabled-element-color);
 }
 
-.reposList {
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
-
 .git-repo-tile {
     height: 104px;
     width: 357px;

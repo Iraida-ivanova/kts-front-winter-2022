@@ -1,16 +1,17 @@
-import "./RepoTile.css";
+import "./RepoTile.module.scss";
 import React from "react";
-import "./RepoTile.css";
 
 import Avatar from "@components/Avatar";
 import StarIcon from "@components/StarIcon";
 import { RepoItem } from "@store/GitHubStore/types";
 
+import styles from "./RepoTile.module.scss";
+
 type RepoTileProps = {
   item: RepoItem;
   onClick: (id: number) => void;
 };
-const getUpdateDate = (date: Date) => {
+export const getUpdateDate = (date: string) => {
   let monthNames = [
     "Jan",
     "Feb",
@@ -32,7 +33,7 @@ const getUpdateDate = (date: Date) => {
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
   const handleClick = () => onClick(item.id);
   return (
-    <div className="git-repo-tile" onClick={handleClick}>
+    <div className={styles.repoTile} onClick={handleClick}>
       <Avatar
         src={item.owner.avatar_url}
         alt={"Avatar"}
@@ -42,25 +43,23 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
             : undefined
         }
       />
-      <div className="git-repo-tile__content">
-        <b className="git-repo-tile__repo-name">{item.name}</b>
-        <p className="git-repo-tile__org-name">
+      <div className={styles.repoTile__content}>
+        <b className={styles.repoTile__content__name}>{item.name}</b>
+        <p className={styles.repoTile__content__orgName}>
           <a
             href={item.owner.html_url}
-            className="git-repo-tile__org-link"
+            className={styles.orgLink}
             target={"blank"}
           >
             {item.owner?.login}
           </a>
         </p>
-        <div className="git-repo-tile__info">
-          <span className="git-repo-tile__rating">
+        <div className={styles.repoTile__content__info}>
+          <span>
             <StarIcon />
             {" " + item.stargazers_count}
           </span>
-          <span className="git-repo-tile__update-date">
-            Updated {getUpdateDate(item.updated_at)}
-          </span>
+          <span>Updated {getUpdateDate(item.updated_at)}</span>
         </div>
       </div>
     </div>

@@ -12,11 +12,17 @@ export type RepoItem = {
   name: string;
   stargazers_count: number;
   owner: GitHubRepoOwner;
-  updated_at: Date;
+  updated_at: string;
+  visibility: string;
+  description: string;
+  topics: [];
 };
 
 export type GetOrganizationReposListParams = {
   organizationName: string;
+};
+export type GetRepoParams = {
+  repoId: number;
 };
 
 export type PostOrganizationReposListParams = {

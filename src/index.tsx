@@ -2,8 +2,8 @@ import React from "react";
 
 import ReactDOM from "react-dom";
 
-import "@styles/index.css";
-import "@styles/variables.css";
+import "@styles/index.module.scss";
+import "@styles/variables.module.scss";
 import App from "./App/App";
 
 ReactDOM.render(

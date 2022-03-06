@@ -3,6 +3,7 @@ import { ApiResponse, HTTPMethod } from "@shared/store/ApiStore/types";
 
 import {
   GetOrganizationReposListParams,
+  GetRepoParams,
   IGitHubStore,
   PostOrganizationReposListParams,
   RepoItem,
@@ -19,6 +20,14 @@ export default class GitHubStore implements IGitHubStore {
       headers: {},
       data: {},
       endpoint: `/orgs/${params.organizationName}/repos`,
+    });
+  }
+  async getRepo(params: GetRepoParams): Promise<ApiResponse<RepoItem, any>> {
+    return await this.apiStore.request({
+      method: HTTPMethod.GET,
+      headers: {},
+      data: {},
+      endpoint: `/repositories/${params.repoId}`,
     });
   }
 
