@@ -11,7 +11,7 @@ import { Navigate, useParams } from "react-router-dom";
 
 import styles from "./RepoPage.module.scss";
 
-const RepoPage = () => {
+const RepoPage: React.FC = () => {
   const { id } = useParams();
   const RepoStore = useLocalStore(() => new RepoItemStore());
   useEffect(() => {

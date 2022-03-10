@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 import styles from "../../App.module.scss";
 
-const Layout = () => {
+const Layout: React.FC = () => {
   return (
     <div className={styles.App}>
       {/*<Header/>*/}

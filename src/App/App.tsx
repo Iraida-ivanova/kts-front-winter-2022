@@ -25,7 +25,7 @@ export const useReposListContext = () => {
   return store;
 };
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Provider>

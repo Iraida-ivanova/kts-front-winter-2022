@@ -12,9 +12,7 @@ import { observer } from "mobx-react-lite";
 
 import styles from "./ReposSearchPage.module.scss";
 
-const gitHubStore = new GitHubStore();
-
-const ReposSearchPage = () => {
+const ReposSearchPage: React.FC = () => {
   const reposListStore = useReposListContext();
   const inputValueStore = useLocalStore(() => new InputValueStore());
 
