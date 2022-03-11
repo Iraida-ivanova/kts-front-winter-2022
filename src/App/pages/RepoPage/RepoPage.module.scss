@@ -1,7 +1,9 @@
 @import "styles/variables.module.scss";
 .repoPage {
+
     .wrapper {
-        width: 600px;
+        width: 100%;
+        min-height: 500px;
         background: $white-color ;
         padding: $indent-outside-element;
         margin: 0 auto;

@@ -35,7 +35,9 @@ const ReposList = () => {
               );
             })
           ) : (
-            <div>Организации с таким названием не найдено</div>
+            <div className={styles.orgNotFound}>
+              Организации с таким названием не найдено
+            </div>
           )}
         </div>
       )}

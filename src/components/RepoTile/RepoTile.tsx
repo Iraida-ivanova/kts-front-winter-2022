@@ -31,7 +31,9 @@ export const getUpdateDate = (date: Date) => {
   return `${day} ${month}`;
 };
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
-  const handleClick = useCallback(() => onClick(item.id), [onClick, item.id]);
+  const handleClick = useCallback(() => {
+    onClick(item.id);
+  }, [onClick, item.id]);
   return (
     <div className={styles.repoTile} onClick={handleClick}>
       <Avatar
@@ -44,16 +46,17 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
         }
       />
       <div className={styles.repoTile__content}>
-        <b className={styles.repoTile__content__name}>{item.name}</b>
-        <p className={styles.repoTile__content__orgName}>
+        <div className={styles.repoTile__content__name}>{item.name}</div>
+        <div className={styles.repoTile__content__orgName}>
           <a
             href={item.owner.htmlUrl}
             className={styles.orgLink}
-            target={"blank"}
+            target={"_blank"}
+            rel="noreferrer"
           >
             {item.owner?.login}
           </a>
-        </p>
+        </div>
         <div className={styles.repoTile__content__info}>
           <span>
             <StarIcon />

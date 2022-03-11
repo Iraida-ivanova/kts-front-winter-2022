@@ -1,0 +1,29 @@
+@import "../../../styles/variables.module";
+.layout {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    //background-color: $body-background-color;
+    font-family: 'Roboto', sans-serif;
+}
+.header {
+    color: $black-text-color;
+    font-size: 24px;
+
+    text-align: center;
+    background-color: $header-background-color
+}
+.content {
+    flex: 1 1 auto;
+    padding: 0 50px;
+    margin:  50px 0;
+}
+.footer {
+    text-align: center;
+    background-color: $footer-background-color;
+}
+.link {
+    @include link($black-text-color);
+}
