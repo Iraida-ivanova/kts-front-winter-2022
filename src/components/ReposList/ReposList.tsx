@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 
-import { useReposListContext } from "@App/App";
-import RepoTile from "@components/RepoTile/RepoTile";
-import { Meta } from "@utils/meta";
+import { useReposListContext } from "App/App";
+import RepoTile from "components/RepoTile/RepoTile";
 import { observer } from "mobx-react-lite";
 import { useNavigate } from "react-router-dom";
+import { Meta } from "utils/meta";
 
 import styles from "./ReposList.module.scss";
 const ReposList = () => {

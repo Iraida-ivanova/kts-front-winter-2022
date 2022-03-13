@@ -1,8 +1,8 @@
 import React from "react";
 
-import ReposListStore from "@store/ReposListStore";
-import { useLocalStore } from "@utils/UseLocalStore";
 import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
+import ReposListStore from "store/ReposListStore";
+import { useLocalStore } from "utils/UseLocalStore";
 
 import "antd/dist/antd.css";
 import MainLayout from "./pages/Layout";
