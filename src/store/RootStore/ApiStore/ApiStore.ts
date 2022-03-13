@@ -1,5 +1,5 @@
-import { HTTPMethod } from "@utils/HTTPMethod";
 import qs from "qs";
+import { HTTPMethod } from "utils/HTTPMethod";
 
 import { ApiResponse, IApiStore, RequestParams, StatusHTTP } from "./types";
 

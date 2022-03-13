@@ -1,4 +1,4 @@
-import ApiStore from "@store/RootStore/ApiStore";
+import ApiStore from "store/RootStore/ApiStore";
 
 export default class RootStore {
   private readonly _apiStore: ApiStore = new ApiStore("https://api.github.com");

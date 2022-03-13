@@ -1,4 +1,4 @@
-import { HTTPMethod } from "@utils/HTTPMethod";
+import { HTTPMethod } from "utils/HTTPMethod";
 
 export type RequestParams<ReqT> = {
   method: HTTPMethod; // Метод запроса, GET или POST

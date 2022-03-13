@@ -1,25 +1,25 @@
 import {
-  normalizeRepoItem,
-  RepoItemApi,
-  RepoItemModel,
-} from "@store/models/gitHub";
-import {
-  CollectionModel,
-  getInitialCollectionModel,
-  linearizeCollection,
-  normalizeCollection,
-} from "@store/models/shared/collection";
-import rootStore from "@store/RootStore";
-import { HTTPMethod } from "@utils/HTTPMethod";
-import { Meta } from "@utils/meta";
-import { ILocalStore } from "@utils/UseLocalStore";
-import {
   action,
   computed,
   makeObservable,
   observable,
   runInAction,
 } from "mobx";
+import {
+  normalizeRepoItem,
+  RepoItemApi,
+  RepoItemModel,
+} from "store/models/gitHub";
+import {
+  CollectionModel,
+  getInitialCollectionModel,
+  linearizeCollection,
+  normalizeCollection,
+} from "store/models/shared/collection";
+import rootStore from "store/RootStore";
+import { HTTPMethod } from "utils/HTTPMethod";
+import { Meta } from "utils/meta";
+import { ILocalStore } from "utils/UseLocalStore";
 
 import { GetOrganizationReposListParams, IReposListStore } from "./types";
 

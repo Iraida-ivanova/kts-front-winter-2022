@@ -1,20 +1,20 @@
 import {
-  normalizeRepoItem,
-  RepoItemApi,
-  RepoItemModel,
-} from "@store/models/gitHub";
-import { GetRepoParams, IRepoItemStore } from "@store/ReposListStore/types";
-import rootStore from "@store/RootStore";
-import { HTTPMethod } from "@utils/HTTPMethod";
-import { Meta } from "@utils/meta";
-import { ILocalStore } from "@utils/UseLocalStore";
-import {
   action,
   computed,
   makeObservable,
   observable,
   runInAction,
 } from "mobx";
+import {
+  normalizeRepoItem,
+  RepoItemApi,
+  RepoItemModel,
+} from "store/models/gitHub";
+import { GetRepoParams, IRepoItemStore } from "store/ReposListStore/types";
+import rootStore from "store/RootStore";
+import { HTTPMethod } from "utils/HTTPMethod";
+import { Meta } from "utils/meta";
+import { ILocalStore } from "utils/UseLocalStore";
 
 type PrivateFields = "_repo" | "_meta";
 export default class RepoItemStore implements IRepoItemStore, ILocalStore {

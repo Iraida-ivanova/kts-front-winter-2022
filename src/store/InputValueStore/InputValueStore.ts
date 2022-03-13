@@ -1,5 +1,5 @@
-import { ILocalStore } from "@utils/UseLocalStore";
 import { action, computed, makeObservable, observable } from "mobx";
+import { ILocalStore } from "utils/UseLocalStore";
 
 type PrivateFields = "_value";
 export default class InputValueStore implements ILocalStore {

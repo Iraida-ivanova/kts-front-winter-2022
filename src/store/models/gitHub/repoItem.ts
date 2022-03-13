@@ -2,7 +2,7 @@ import {
   GitHubRepoOwnerApi,
   GitHubRepoOwnerModel,
   normalizeGitHubRepoOwner,
-} from "@store/models/gitHub/gitHubRepoOwner";
+} from "store/models/gitHub/gitHubRepoOwner";
 
 export type RepoItemApi = {
   id: number;

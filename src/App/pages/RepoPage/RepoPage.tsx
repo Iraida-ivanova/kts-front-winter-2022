@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 
-import Avatar from "@components/Avatar";
-import { getUpdateDate } from "@components/RepoTile/RepoTile";
-import StarIcon from "@components/StarIcon/StarIcon";
-import RepoItemStore from "@store/RepoItemStore";
-import { Meta } from "@utils/meta";
-import { useLocalStore } from "@utils/UseLocalStore";
+import Avatar from "components/Avatar";
+import { getUpdateDate } from "components/RepoTile/RepoTile";
+import StarIcon from "components/StarIcon/StarIcon";
 import { observer } from "mobx-react-lite";
 import { Navigate, useParams } from "react-router-dom";
+import RepoItemStore from "store/RepoItemStore";
+import { Meta } from "utils/meta";
+import { useLocalStore } from "utils/UseLocalStore";
 
 import styles from "./RepoPage.module.scss";
 
