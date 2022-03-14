@@ -5,6 +5,7 @@ import {
   observable,
   runInAction,
 } from "mobx";
+import InputValueStore from "store/InputValueStore";
 import {
   normalizeRepoItem,
   RepoItemApi,
@@ -21,7 +22,7 @@ import { HTTPMethod } from "utils/HTTPMethod";
 import { Meta } from "utils/meta";
 import { ILocalStore } from "utils/UseLocalStore";
 
-import { GetOrganizationReposListParams, IReposListStore } from "./types";
+import { IReposListStore } from "./types";
 
 type PrivateFields = "_list" | "_meta";
 
@@ -29,6 +30,7 @@ export default class ReposListStore implements IReposListStore, ILocalStore {
   private _list: CollectionModel<number, RepoItemModel> =
     getInitialCollectionModel();
   private _meta: Meta = Meta.initial;
+  private _input: InputValueStore = new InputValueStore();
   constructor() {
     makeObservable<ReposListStore, PrivateFields>(this, {
       _meta: observable,
@@ -44,10 +46,11 @@ export default class ReposListStore implements IReposListStore, ILocalStore {
   get meta(): Meta {
     return this._meta;
   }
+  get input(): InputValueStore {
+    return this._input;
+  }
 
-  async getOrganizationReposList(
-    params: GetOrganizationReposListParams
-  ): Promise<void> {
+  async getOrganizationReposList(): Promise<void> {
     this._meta = Meta.loading;
     this._list = getInitialCollectionModel();
 
@@ -56,14 +59,14 @@ export default class ReposListStore implements IReposListStore, ILocalStore {
         method: HTTPMethod.GET,
         headers: {},
         data: {},
-        endpoint: `/orgs/${params.organizationName}/repos`,
+        endpoint: `/orgs/${this._input.value}/repos`,
       });
       runInAction(() => {
         if (result.success) {
           try {
             this._meta = Meta.success;
             this._list = normalizeCollection(
-              result.data.map((item) => normalizeRepoItem(item)),
+              result.data.map(normalizeRepoItem),
               (item) => item.id
             );
             return;

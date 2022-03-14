@@ -1,9 +1,6 @@
 export type GetOrganizationReposListParams = {
   organizationName: string;
 };
-export type GetRepoParams = {
-  repoId: number;
-};
 
 export type PostOrganizationReposListParams = {
   organizationName: string;
@@ -11,11 +8,9 @@ export type PostOrganizationReposListParams = {
 };
 
 export interface IReposListStore {
-  getOrganizationReposList(
-    params: GetOrganizationReposListParams
-  ): Promise<void>;
+  getOrganizationReposList(): Promise<void>;
 }
 
 export interface IRepoItemStore {
-  getRepo(params: GetRepoParams): Promise<void>;
+  getRepo(): Promise<void>;
 }

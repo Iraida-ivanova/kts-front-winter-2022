@@ -13,49 +13,48 @@ import styles from "./RepoPage.module.scss";
 
 const RepoPage: React.FC = () => {
   const { id } = useParams();
-  const RepoStore = useLocalStore(() => new RepoItemStore());
+  const repoStore = useLocalStore(() => new RepoItemStore(id));
   useEffect(() => {
-    RepoStore.getRepo({
-      repoId: Number(id),
-    });
-  }, [id, RepoStore]);
+    repoStore.getRepo();
+  }, [repoStore.id]);
 
   return (
     <div className={styles.repoPage}>
-      {RepoStore.meta === Meta.error && <Navigate to={"/repos"} />}
-      {RepoStore.meta === Meta.success && RepoStore.repo && (
+      {repoStore.meta === Meta.error && <Navigate to={"/repos"} />}
+      {repoStore.meta === Meta.loading && <div>Страница загружается...</div>}
+      {repoStore.meta === Meta.success && repoStore.repo && (
         <div className={styles.wrapper}>
           <div className={styles.header}>
             <Avatar
-              src={RepoStore.repo.owner.avatarUrl}
+              src={repoStore.repo.owner.avatarUrl}
               alt={"Avatar"}
               letter={
-                RepoStore.repo.owner.login.length
-                  ? RepoStore.repo.owner.login[0].toUpperCase()
+                repoStore.repo.owner.login.length
+                  ? repoStore.repo.owner.login[0].toUpperCase()
                   : undefined
               }
             />
             <div>
               <span className={styles.ownerName}>
-                {RepoStore.repo.owner.login} /{" "}
+                {repoStore.repo.owner.login} /{" "}
               </span>
-              <span className={styles.repoName}>{RepoStore.repo.name}</span>
+              <span className={styles.repoName}>{repoStore.repo.name}</span>
             </div>
             <div className={styles.repoVisibility}>
-              {RepoStore.repo.visibility}
+              {repoStore.repo.visibility}
             </div>
           </div>
-          {RepoStore.repo.description && (
+          {repoStore.repo.description && (
             <div className={styles.description}>
               <h3>About</h3>
               <p className={styles.descriptionText}>
-                {RepoStore.repo.description}
+                {repoStore.repo.description}
               </p>
             </div>
           )}
-          {RepoStore.repo.topics.length > 0 && (
+          {repoStore.repo.topics.length > 0 && (
             <div className={styles.topics}>
-              {RepoStore.repo.topics.map((item) => {
+              {repoStore.repo.topics.map((item) => {
                 return (
                   <span className={styles.topic} key={item}>
                     {item}
@@ -67,9 +66,9 @@ const RepoPage: React.FC = () => {
           <div className={styles.repoInfo}>
             <span>
               <StarIcon />
-              {" " + RepoStore.repo.stargazersCount} stars
+              {" " + repoStore.repo.stargazersCount} stars
             </span>
-            <span>Updated {getUpdateDate(RepoStore.repo.updatedAt)}</span>
+            <span>Updated {getUpdateDate(repoStore.repo.updatedAt)}</span>
           </div>
         </div>
       )}

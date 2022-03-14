@@ -10,7 +10,7 @@ import {
   RepoItemApi,
   RepoItemModel,
 } from "store/models/gitHub";
-import { GetRepoParams, IRepoItemStore } from "store/ReposListStore/types";
+import { IRepoItemStore } from "store/ReposListStore/types";
 import rootStore from "store/RootStore";
 import { HTTPMethod } from "utils/HTTPMethod";
 import { Meta } from "utils/meta";
@@ -20,8 +20,10 @@ type PrivateFields = "_repo" | "_meta";
 export default class RepoItemStore implements IRepoItemStore, ILocalStore {
   private _repo: RepoItemModel | null = null;
   private _meta: Meta = Meta.initial;
+  private readonly _id: string | undefined;
 
-  constructor() {
+  constructor(id: string | undefined) {
+    this._id = id;
     makeObservable<RepoItemStore, PrivateFields>(this, {
       _meta: observable,
       _repo: observable.ref,
@@ -36,8 +38,11 @@ export default class RepoItemStore implements IRepoItemStore, ILocalStore {
   get meta(): Meta {
     return this._meta;
   }
+  get id(): string | undefined {
+    return this._id;
+  }
 
-  async getRepo(params: GetRepoParams): Promise<void> {
+  async getRepo(): Promise<void> {
     this._meta = Meta.loading;
     this._repo = null;
     try {
@@ -45,7 +50,7 @@ export default class RepoItemStore implements IRepoItemStore, ILocalStore {
         method: HTTPMethod.GET,
         headers: {},
         data: {},
-        endpoint: `/repositories/${params.repoId}`,
+        endpoint: `/repositories/${this._id}`,
       });
       runInAction(() => {
         if (result.success) {

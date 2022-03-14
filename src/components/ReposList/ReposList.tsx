@@ -9,16 +9,11 @@ import { Meta } from "utils/meta";
 import styles from "./ReposList.module.scss";
 const ReposList = () => {
   const reposListStore = useReposListContext();
-
   let navigate = useNavigate();
-  const onClickRepoTile = React.useCallback((id: number) => {
-    navigate(`${id}`);
-  }, []);
   useEffect(() => {
-    reposListStore.getOrganizationReposList({
-      organizationName: "ktsstudio",
-    });
-  }, [reposListStore]);
+    reposListStore.input.setValue("ktsstudio");
+    reposListStore.getOrganizationReposList();
+  }, []);
 
   return (
     <div>
@@ -29,9 +24,15 @@ const ReposList = () => {
       ) : (
         <div className={styles.reposList}>
           {reposListStore.meta === Meta.success ? (
-            reposListStore.list?.map((item) => {
+            reposListStore.list.map((item) => {
               return (
-                <RepoTile item={item} key={item.id} onClick={onClickRepoTile} />
+                <RepoTile
+                  item={item}
+                  key={item.id}
+                  onClick={(id: number) => {
+                    navigate(`${id}`);
+                  }}
+                />
               );
             })
           ) : (
@@ -45,4 +46,4 @@ const ReposList = () => {
   );
 };
 
-export default React.memo(observer(ReposList));
+export default observer(ReposList);
