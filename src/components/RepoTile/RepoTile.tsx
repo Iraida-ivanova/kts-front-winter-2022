@@ -1,17 +1,18 @@
 import "./RepoTile.module.scss";
+
 import React from "react";
 
-import Avatar from "@components/Avatar";
-import StarIcon from "@components/StarIcon";
-import { RepoItem } from "@store/GitHubStore/types";
+import Avatar from "components/Avatar";
+import StarIcon from "components/StarIcon";
+import { RepoItemModel } from "store/models/gitHub";
 
 import styles from "./RepoTile.module.scss";
 
 type RepoTileProps = {
-  item: RepoItem;
+  item: RepoItemModel;
   onClick: (id: number) => void;
 };
-export const getUpdateDate = (date: string) => {
+export const getUpdateDate = (date: Date) => {
   let monthNames = [
     "Jan",
     "Feb",
@@ -26,16 +27,15 @@ export const getUpdateDate = (date: string) => {
     "Nov",
     "Dec",
   ];
-  const day: number = new Date(date).getDate();
+  const day: number = date.getDate();
   const month: string = monthNames[new Date(date).getMonth()];
   return `${day} ${month}`;
 };
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
-  const handleClick = () => onClick(item.id);
   return (
-    <div className={styles.repoTile} onClick={handleClick}>
+    <div className={styles.repoTile} onClick={() => onClick(item.id)}>
       <Avatar
-        src={item.owner.avatar_url}
+        src={item.owner.avatarUrl}
         alt={"Avatar"}
         letter={
           item.owner.login.length
@@ -44,22 +44,23 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
         }
       />
       <div className={styles.repoTile__content}>
-        <b className={styles.repoTile__content__name}>{item.name}</b>
-        <p className={styles.repoTile__content__orgName}>
+        <div className={styles.repoTile__content__name}>{item.name}</div>
+        <div className={styles.repoTile__content__orgName}>
           <a
-            href={item.owner.html_url}
+            href={item.owner.htmlUrl}
             className={styles.orgLink}
-            target={"blank"}
+            target={"_blank"}
+            rel="noreferrer"
           >
             {item.owner?.login}
           </a>
-        </p>
+        </div>
         <div className={styles.repoTile__content__info}>
           <span>
             <StarIcon />
-            {" " + item.stargazers_count}
+            {" " + item.stargazersCount}
           </span>
-          <span>Updated {getUpdateDate(item.updated_at)}</span>
+          <span>Updated {getUpdateDate(item.updatedAt)}</span>
         </div>
       </div>
     </div>

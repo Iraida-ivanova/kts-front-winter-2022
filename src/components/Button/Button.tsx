@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./Button.module.scss";
 type ButtonProps = {
   children: React.ReactNode;
-  onClick: (e: React.MouseEvent) => void;
+  onClick: () => void;
   disabled?: boolean;
 };
 const Button: React.FC<ButtonProps> = ({ onClick, children, disabled }) => {

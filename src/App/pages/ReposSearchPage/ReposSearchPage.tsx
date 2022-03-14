@@ -1,61 +1,35 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import Button from "@components/Button";
-import Input from "@components/Input";
-import RepoTile from "@components/RepoTile";
-import SearchIcon from "@components/SearchIcon";
-import { useNavigate } from "react-router-dom";
+import { useReposListContext } from "App/App";
+import Button from "components/Button";
+import Input from "components/Input";
+import ReposList from "components/ReposList";
+import SearchIcon from "components/SearchIcon";
+import { observer } from "mobx-react-lite";
+import { Meta } from "utils/meta";
 
-import { useReposContext } from "../../App";
 import styles from "./ReposSearchPage.module.scss";
 
-const gitHubStore = new GitHubStore();
-
-const ReposSearchPage = () => {
-  const [value, setValue] = React.useState("");
-  const handleChange = (newValue: string): void => {
-    setValue(newValue);
-  };
-  const ReposContext = useReposContext();
-  const handleClick = (e: React.MouseEvent) => {
-    ReposContext.load(value);
-  };
-  let navigate = useNavigate();
-  const onClickRepoTile = (id: number) => {
-    navigate(`${id}`);
-  };
-  useEffect(() => {
-    ReposContext.load("ktsstudio");
-  }, []);
+const ReposSearchPage: React.FC = () => {
+  const reposListStore = useReposListContext();
 
   return (
     <div className={styles.listRepository}>
       <Input
-        value={value}
+        value={reposListStore.input.value}
         placeholder={"Введите название организации"}
-        onChange={handleChange}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          reposListStore.input.setValue(e.target.value)
+        }
       />
-      <Button onClick={handleClick} disabled={ReposContext.isLoading}>
+      <Button
+        onClick={() => reposListStore.getOrganizationReposList()}
+        disabled={reposListStore.meta === Meta.loading}
+      >
         <SearchIcon />
       </Button>
-      {ReposContext.isLoading ? (
-        <div className={styles.listRepositoryIsLoading}>
-          Список репозиториев загружается...
-        </div>
-      ) : (
-        <div className={styles.reposList}>
-          {!ReposContext.error ? (
-            ReposContext.list?.map((item) => {
-              return (
-                <RepoTile item={item} key={item.id} onClick={onClickRepoTile} />
-              );
-            })
-          ) : (
-            <div>Организации с таким названием не найдено</div>
-          )}
-        </div>
-      )}
+      <ReposList />
     </div>
   );
 };
-export default ReposSearchPage;
+export default observer(ReposSearchPage);

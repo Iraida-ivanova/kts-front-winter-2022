@@ -1,4 +1,5 @@
-$body-background-color: #E5E5E5;
+$header-background-color:#c8cacc;
+$footer-background-color: #E5E5E5;
 $disabled-element-color:#D9D9D9;
 $gray-text-color: #7E7E7E;
 $hover-link-color: #208FBF;
@@ -16,5 +17,13 @@ $indent-outside-element: 20px;
   height: $size;
   width: $size;
   border-radius: $radius;
+}
+@mixin link ($color:$gray-text-color) {
+  color: $color;
+  text-decoration:none;
+  &:hover {
+    color: $hover-link-color;
+    text-decoration:none;
+  }
 }
 

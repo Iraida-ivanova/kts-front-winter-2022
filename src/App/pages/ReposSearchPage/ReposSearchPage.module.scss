@@ -12,11 +12,3 @@
     row-gap: $indent-outside-element;
 }
 
-.listRepositoryIsLoading {
-    width: 100%;
-    height: 100px;
-}
-.reposList {
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
