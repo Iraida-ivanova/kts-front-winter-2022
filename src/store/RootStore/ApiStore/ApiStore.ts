@@ -1,5 +1,6 @@
 import qs from "qs";
 import { HTTPMethod } from "utils/HTTPMethod";
+import  "regenerator-runtime";
 
 import { ApiResponse, IApiStore, RequestParams, StatusHTTP } from "./types";
 
