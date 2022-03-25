@@ -9,7 +9,8 @@ type InputProps = {
 };
 
 const Input: React.FC<InputProps> = ({ value, placeholder, onChange }) => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    onChange(e.target.value);
   return (
     <div>
       <input

@@ -18,9 +18,7 @@ const ReposSearchPage: React.FC = () => {
       <Input
         value={reposListStore.input.value}
         placeholder={"Введите название организации"}
-        onChange={(value) =>
-          reposListStore.input.setValue(value)
-        }
+        onChange={(value) => reposListStore.input.setValue(value)}
       />
       <Button
         onClick={() => reposListStore.getOrganizationReposList()}
