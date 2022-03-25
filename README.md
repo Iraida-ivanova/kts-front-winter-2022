@@ -1,42 +1,28 @@
-# Getting Started with Create React App
+# Client Api GitHub
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Удобный интерфейс для отправки запросов в сеть
 
-## Available Scripts
+## Реализованный функционал
 
-In the project directory, you can run:
+В форму ввода пользователь вводит название организации и при клике на кнопку поиска в сеть отправляется запрос, возвращающий список репозиторие данной организации.
+При клике на карточку репозитория осуществляется переход на страницу с детальной информацией о репозитории.
+Логика получения id выбранного репозитория из path реализована c помощью хука useParams.
 
-### `yarn start`
+### Использование MobX-сторов
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Для каждого функционала созданы отдельные MobX-сторы, которые реализуют интерфейс ILocalStore и подключаются с помощью useLocalStore:
+ReposListStore — создан в компоненте со списком репозиториев.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+RepoItemStore — создан в компоненте с детальной информацией о репозитории.
 
-### `yarn test`
+### Реализация роутинга
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Реализован роутинг при помощи библиотеки react-router-dom 6 
 
-### `yarn build`
+### Использование React.Context для хранения списка репозиториев
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Для доступа к данным из контекста используется свой хук useReposListContext, который возвращет экземпляр локального стора ReposListStore. Таким образом можно обращаться к стору во всём Реакт-поддереве.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Использование css-modules и scss
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-
+Для стилизации исользуется css-modules и scss. Переменные и миксины вынесены в отдельный файл. 
